@@ -23,7 +23,7 @@ import java.nio.charset.Charset;
  */
 public class MOTDListener implements Listener {
 
-    private int timeout = 1500;
+    private int timeout = 4000;
 
     private int pingVersion = -1;
     private Byte protocolVersion = -1;
@@ -160,9 +160,9 @@ public class MOTDListener implements Listener {
 
             String string = new String(chars);
 
+
             if (string.startsWith("§")) {
                 String[] data = string.split("\0");
-
                 this.setPingVersion(Integer.parseInt(data[0].substring(1)));
                 this.setProtocolVersion(Byte.valueOf(data[1]));
                 this.setGameVersion(data[2]);
@@ -187,6 +187,7 @@ public class MOTDListener implements Listener {
         } catch (SocketException exception) {
             return false;
         } catch (IOException exception) {
+            System.out.println(exception.getMessage());
             return false;
         }
 
